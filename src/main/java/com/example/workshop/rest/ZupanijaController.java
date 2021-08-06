@@ -1,7 +1,7 @@
 package com.example.workshop.rest;
 
 import com.example.workshop.model.zupanija.ZupanijaDTO;
-import com.example.workshop.service.ZupanijaService;
+import com.example.workshop.service.zupanija.ZupanijaService;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

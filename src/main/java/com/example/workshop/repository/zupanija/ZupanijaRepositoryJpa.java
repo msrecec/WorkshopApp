@@ -1,4 +1,4 @@
-package com.example.workshop.repository;
+package com.example.workshop.repository.zupanija;
 
 import com.example.workshop.model.zupanija.Zupanija;
 import org.springframework.data.jpa.repository.JpaRepository;

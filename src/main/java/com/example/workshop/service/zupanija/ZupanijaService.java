@@ -1,4 +1,4 @@
-package com.example.workshop.service;
+package com.example.workshop.service.zupanija;
 
 import com.example.workshop.model.zupanija.ZupanijaDTO;
 

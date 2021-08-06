@@ -1,4 +1,4 @@
-package com.example.workshop.model.zupanija;
+package com.example.workshop.model.mjesto;
 
 
 import lombok.*;
@@ -11,8 +11,8 @@ import javax.persistence.Id;
 @Builder
 @Getter
 @Setter
-public class ZupanijaDTO {
-
+public class MjestoDTO {
+    private Long pbrMjesto;
+    private String nazivMjesto;
     private Long sifZupanija;
-    private String nazivZupanija;
 }
