@@ -1,6 +1,7 @@
 package com.example.workshop.model.mjesto;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 import javax.persistence.Column;
@@ -14,5 +15,4 @@ import javax.persistence.Id;
 public class MjestoDTO {
     private Long pbrMjesto;
     private String nazivMjesto;
-    private Long sifZupanija;
 }

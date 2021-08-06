@@ -17,10 +17,10 @@ import java.util.List;
 public class Zupanija {
 
     @Id
-    @Column(name="sifzupanija")
+    @Column(name="sifzupanija", unique = true)
     private Long sifZupanija;
     @Column(name="nazivzupanija")
     private String nazivZupanija;
-    @OneToMany(mappedBy="mjesto")
+    @OneToMany(mappedBy="zupanija")
     private List<Mjesto> mjesta;
 }

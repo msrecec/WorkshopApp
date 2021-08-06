@@ -16,12 +16,11 @@ import javax.persistence.*;
 public class Mjesto {
 
     @Id
-    @Column(name="pbrmjesto")
+    @Column(name="pbrmjesto", unique = true)
     private Long pbrMjesto;
-    @Column(name="nazivmjesto")
+    @Column(name="nazivmjesto", unique = true)
     private String nazivMjesto;
-    @Column(name="sifzupanija")
-    private Long sifZupanija;
     @ManyToOne
+    @JoinColumn(name="sifzupanija")
     private Zupanija zupanija;
 }
