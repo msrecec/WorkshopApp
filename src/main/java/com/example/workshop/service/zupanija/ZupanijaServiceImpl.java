@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -27,4 +28,8 @@ public class ZupanijaServiceImpl implements ZupanijaService {
         return zupanijaRepositoryJpa.findAll().stream().map(mapper::zupanijaToZupanijaDTO).collect(Collectors.toList());
     }
 
+    @Override
+    public Optional<ZupanijaDTO> findByNazivZupanija(String naziv) {
+        return zupanijaRepositoryJpa.findByNazivZupanija(naziv).map(mapper::zupanijaToZupanijaDTO);
+    }
 }

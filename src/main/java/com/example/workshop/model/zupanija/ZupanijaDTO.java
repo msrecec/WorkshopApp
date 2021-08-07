@@ -13,6 +13,5 @@ import javax.persistence.Id;
 @Setter
 public class ZupanijaDTO {
 
-    private Long sifZupanija;
     private String nazivZupanija;
 }

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 public class MapperImpl implements Mapper {
     @Override
     public ZupanijaDTO zupanijaToZupanijaDTO(Zupanija zupanija) {
-        return new ZupanijaDTO(zupanija.getSifZupanija(), zupanija.getNazivZupanija());
+        return new ZupanijaDTO( zupanija.getNazivZupanija());
     }
 
     @Override

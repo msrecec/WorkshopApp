@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("mjesto")
+@RequestMapping("api/v1/mjesto")
 @CrossOrigin(origins = "http://localhost:4200")
 public class MjestoController {
 
