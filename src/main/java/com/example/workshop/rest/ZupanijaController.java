@@ -1,6 +1,8 @@
 package com.example.workshop.rest;
 
+import com.example.workshop.model.count.Count;
 import com.example.workshop.model.zupanija.ZupanijaDTO;
+import com.example.workshop.model.zupanija.ZupanijaDTOPaginated;
 import com.example.workshop.service.zupanija.ZupanijaService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -33,8 +35,20 @@ public class ZupanijaController {
     }
 
     @GetMapping(params = "page")
-    public List<ZupanijaDTO> getZupanijaPaginated(@RequestParam(name = "page") final int page) {
-        return zupanijaService.findZupanijaByPage(page);
+    public ResponseEntity<ZupanijaDTOPaginated> getZupanijaPaginated(@RequestParam(name = "page") final int page) {
+        return zupanijaService.findZupanijaByPage(page)
+                .map(ResponseEntity::ok)
+                .orElseGet(
+                        () -> ResponseEntity.notFound()
+                        .build()
+                );
+    }
+
+    @GetMapping("/count")
+    public ResponseEntity<Count> getZupanijaCount() {
+        return zupanijaService.findZupanijaCount()
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
 }

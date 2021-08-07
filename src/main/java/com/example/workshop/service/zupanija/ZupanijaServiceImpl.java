@@ -1,7 +1,9 @@
 package com.example.workshop.service.zupanija;
 
 import com.example.workshop.mappings.mapper.Mapper;
+import com.example.workshop.model.count.Count;
 import com.example.workshop.model.zupanija.ZupanijaDTO;
+import com.example.workshop.model.zupanija.ZupanijaDTOPaginated;
 import com.example.workshop.repository.zupanija.ZupanijaRepository;
 import com.example.workshop.repository.zupanija.ZupanijaRepositoryJpa;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +38,12 @@ public class ZupanijaServiceImpl implements ZupanijaService {
     }
 
     @Override
-    public List<ZupanijaDTO> findZupanijaByPage(int page) {
-        return zupanijaRepository.findZupanijaByPage(page).stream().map(mapper::zupanijaToZupanijaDTO).collect(Collectors.toList());
+    public Optional<ZupanijaDTOPaginated> findZupanijaByPage(int page) {
+        return zupanijaRepository.findZupanijaByPage(page).map(mapper::zupanijaToZupanijaDTOPaginated);
+    }
+
+    @Override
+    public Optional<Count> findZupanijaCount() {
+        return zupanijaRepository.findZupanijaCount();
     }
 }
