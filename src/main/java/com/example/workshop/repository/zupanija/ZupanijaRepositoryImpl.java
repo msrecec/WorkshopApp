@@ -40,11 +40,7 @@ public class ZupanijaRepositoryImpl implements ZupanijaRepository{
                 throw new RuntimeException("Page must not be smaller than 1");
             }
             Integer count = jdbc.queryForObject(SELECT_COUNT, rowMapperCustom::mapRowToCount);
-            System.out.println("Number of zupanijas " + count);
             int offset = (page-1) * pageSize;
-            System.out.println("Limit = " + pageSize);
-            System.out.println("Offset = " + offset);
-            System.out.println("Count = " + count);
             if(offset >= count) {
                 throw new RuntimeException("Offset must be smaller than the total number of elements");
             }
