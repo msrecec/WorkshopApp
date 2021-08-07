@@ -8,4 +8,5 @@ import java.util.Optional;
 public interface ZupanijaService {
     List<ZupanijaDTO> findAll();
     Optional<ZupanijaDTO> findByNazivZupanija(String naziv);
+    List<ZupanijaDTO> findZupanijaByPage(int page);
 }

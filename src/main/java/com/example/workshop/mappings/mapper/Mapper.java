@@ -1,4 +1,4 @@
-package com.example.workshop.mappings;
+package com.example.workshop.mappings.mapper;
 
 import com.example.workshop.model.mjesto.Mjesto;
 import com.example.workshop.model.mjesto.MjestoDTO;

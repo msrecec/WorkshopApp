@@ -1,8 +1,8 @@
 package com.example.workshop.service.zupanija;
 
-import com.example.workshop.mappings.Mapper;
-import com.example.workshop.model.zupanija.Zupanija;
+import com.example.workshop.mappings.mapper.Mapper;
 import com.example.workshop.model.zupanija.ZupanijaDTO;
+import com.example.workshop.repository.zupanija.ZupanijaRepository;
 import com.example.workshop.repository.zupanija.ZupanijaRepositoryJpa;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,11 +15,13 @@ import java.util.stream.Collectors;
 public class ZupanijaServiceImpl implements ZupanijaService {
 
     private final ZupanijaRepositoryJpa zupanijaRepositoryJpa;
+    private final ZupanijaRepository zupanijaRepository;
     private final Mapper mapper;
 
     @Autowired
-    public ZupanijaServiceImpl(ZupanijaRepositoryJpa zupanijaRepositoryJpa, Mapper mapper) {
+    public ZupanijaServiceImpl(ZupanijaRepositoryJpa zupanijaRepositoryJpa, Mapper mapper, ZupanijaRepository zupanijaRepository) {
         this.zupanijaRepositoryJpa = zupanijaRepositoryJpa;
+        this.zupanijaRepository = zupanijaRepository;
         this.mapper = mapper;
     }
 
@@ -31,5 +33,10 @@ public class ZupanijaServiceImpl implements ZupanijaService {
     @Override
     public Optional<ZupanijaDTO> findByNazivZupanija(String naziv) {
         return zupanijaRepositoryJpa.findByNazivZupanija(naziv).map(mapper::zupanijaToZupanijaDTO);
+    }
+
+    @Override
+    public List<ZupanijaDTO> findZupanijaByPage(int page) {
+        return zupanijaRepository.findZupanijaByPage(page).stream().map(mapper::zupanijaToZupanijaDTO).collect(Collectors.toList());
     }
 }

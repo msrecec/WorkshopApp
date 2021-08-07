@@ -32,4 +32,9 @@ public class ZupanijaController {
                 );
     }
 
+    @GetMapping(params = "page")
+    public List<ZupanijaDTO> getZupanijaPaginated(@RequestParam(name = "page") final int page) {
+        return zupanijaService.findZupanijaByPage(page);
+    }
+
 }

@@ -1,7 +1,6 @@
 package com.example.workshop.service.mjesto;
 
-import com.example.workshop.mappings.Mapper;
-import com.example.workshop.model.mjesto.Mjesto;
+import com.example.workshop.mappings.mapper.Mapper;
 import com.example.workshop.model.mjesto.MjestoDTO;
 import com.example.workshop.repository.mjesto.MjestoRepositoryJpa;
 import org.springframework.beans.factory.annotation.Autowired;
