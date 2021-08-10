@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name="zupanija")
+@Table(name="zupanija", schema = "public")
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -16,9 +16,10 @@ import java.util.List;
 public class Zupanija {
 
     @Id
-    @Column(name="sifzupanija", unique = true)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "sif_zupanija", unique = true)
     private Long sifZupanija;
-    @Column(name="nazivzupanija")
+    @Column(name="naziv_zupanija")
     private String nazivZupanija;
     @OneToMany(mappedBy="zupanija")
     private List<Mjesto> mjesta;

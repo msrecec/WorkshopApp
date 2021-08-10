@@ -1,6 +1,7 @@
 package com.example.workshop.service.mjesto;
 
-import com.example.workshop.mappings.mapper.Mapper;
+import com.example.workshop.mappings.mapper.mjesto.MjestoMapper;
+import com.example.workshop.mappings.mapper.mjesto.MjestoMapperImpl;
 import com.example.workshop.model.count.Count;
 import com.example.workshop.model.mjesto.MjestoDTO;
 import com.example.workshop.model.mjesto.MjestoDTOPaginated;
@@ -18,10 +19,10 @@ public class MjestoServiceImpl implements MjestoService{
 
     private final MjestoRepositoryJpa mjestoRepositoryJpa;
     private final MjestoRepository mjestoRepository;
-    private final Mapper mapper;
+    private final MjestoMapper mapper;
 
     @Autowired
-    public MjestoServiceImpl(MjestoRepositoryJpa mjestoRepositoryJpa, Mapper mapper, MjestoRepository mjestoRepository) {
+    public MjestoServiceImpl(MjestoRepositoryJpa mjestoRepositoryJpa, MjestoMapperImpl mapper, MjestoRepository mjestoRepository) {
         this.mjestoRepositoryJpa = mjestoRepositoryJpa;
         this.mjestoRepository = mjestoRepository;
         this.mapper = mapper;

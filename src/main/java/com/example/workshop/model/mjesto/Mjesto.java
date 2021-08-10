@@ -7,7 +7,7 @@ import lombok.*;
 import javax.persistence.*;
 
 @Entity
-@Table(name="mjesto")
+@Table(name="mjesto", schema = "public")
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -16,11 +16,12 @@ import javax.persistence.*;
 public class Mjesto {
 
     @Id
-    @Column(name="pbrmjesto", unique = true)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "pbr_mjesto", unique = true)
     private Long pbrMjesto;
-    @Column(name="nazivmjesto", unique = true)
+    @Column(name="naziv_mjesto", unique = true)
     private String nazivMjesto;
     @ManyToOne
-    @JoinColumn(name="sifzupanija")
+    @JoinColumn(name="sif_zupanija")
     private Zupanija zupanija;
 }

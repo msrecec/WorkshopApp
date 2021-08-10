@@ -1,6 +1,7 @@
 package com.example.workshop.service.zupanija;
 
-import com.example.workshop.mappings.mapper.Mapper;
+import com.example.workshop.mappings.mapper.zupanija.ZupanijaMapper;
+import com.example.workshop.mappings.mapper.zupanija.ZupanijaMapperImpl;
 import com.example.workshop.model.count.Count;
 import com.example.workshop.model.zupanija.ZupanijaDTO;
 import com.example.workshop.model.zupanija.ZupanijaDTOPaginated;
@@ -18,10 +19,10 @@ public class ZupanijaServiceImpl implements ZupanijaService {
 
     private final ZupanijaRepositoryJpa zupanijaRepositoryJpa;
     private final ZupanijaRepository zupanijaRepository;
-    private final Mapper mapper;
+    private final ZupanijaMapper mapper;
 
     @Autowired
-    public ZupanijaServiceImpl(ZupanijaRepositoryJpa zupanijaRepositoryJpa, Mapper mapper, ZupanijaRepository zupanijaRepository) {
+    public ZupanijaServiceImpl(ZupanijaRepositoryJpa zupanijaRepositoryJpa, ZupanijaMapperImpl mapper, ZupanijaRepository zupanijaRepository) {
         this.zupanijaRepositoryJpa = zupanijaRepositoryJpa;
         this.zupanijaRepository = zupanijaRepository;
         this.mapper = mapper;
