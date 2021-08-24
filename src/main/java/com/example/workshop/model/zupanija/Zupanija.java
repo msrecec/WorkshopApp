@@ -1,6 +1,9 @@
 package com.example.workshop.model.zupanija;
 
 import com.example.workshop.model.mjesto.Mjesto;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -17,10 +20,10 @@ public class Zupanija {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "sif_zupanija", unique = true)
+    @Column(name = "sif_zupanija")
     private Long sifZupanija;
     @Column(name="naziv_zupanija")
     private String nazivZupanija;
-    @OneToMany(mappedBy="zupanija")
+    @OneToMany(mappedBy="zupanija", fetch = FetchType.EAGER)
     private List<Mjesto> mjesta;
 }

@@ -3,6 +3,8 @@ package com.example.workshop.service.zupanija;
 import com.example.workshop.mappings.mapper.zupanija.ZupanijaMapper;
 import com.example.workshop.mappings.mapper.zupanija.ZupanijaMapperImpl;
 import com.example.workshop.model.count.Count;
+import com.example.workshop.model.zupanija.Zupanija;
+import com.example.workshop.model.zupanija.ZupanijaCommand;
 import com.example.workshop.model.zupanija.ZupanijaDTO;
 import com.example.workshop.model.zupanija.ZupanijaDTOPaginated;
 import com.example.workshop.repository.zupanija.ZupanijaRepository;
@@ -46,5 +48,10 @@ public class ZupanijaServiceImpl implements ZupanijaService {
     @Override
     public Optional<Count> findZupanijaCount() {
         return zupanijaRepository.findZupanijaCount();
+    }
+
+    @Override
+    public Optional<ZupanijaDTO> save(ZupanijaCommand command) {
+        return Optional.ofNullable(zupanijaRepositoryJpa.save(mapper.mapCommandToZupanija(command))).map(mapper::zupanijaToZupanijaDTO);
     }
 }

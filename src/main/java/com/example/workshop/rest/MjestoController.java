@@ -2,8 +2,10 @@ package com.example.workshop.rest;
 
 
 import com.example.workshop.model.count.Count;
+import com.example.workshop.model.mjesto.Mjesto;
 import com.example.workshop.model.mjesto.MjestoDTO;
 import com.example.workshop.model.mjesto.MjestoDTOPaginated;
+import com.example.workshop.model.zupanija.Zupanija;
 import com.example.workshop.service.mjesto.MjestoService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -51,5 +53,11 @@ public class MjestoController {
         return mjestoService.findMjestoCount()
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+
+    @GetMapping("/test")
+    public ResponseEntity<Mjesto> getZupanijaTest() {
+        return mjestoService.testGetMjesto().map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 }

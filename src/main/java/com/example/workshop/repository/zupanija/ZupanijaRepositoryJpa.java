@@ -9,4 +9,5 @@ import java.util.Optional;
 public interface ZupanijaRepositoryJpa extends JpaRepository<Zupanija, Long> {
     List<Zupanija> findAll();
     Optional<Zupanija> findByNazivZupanija(String naziv);
+    Zupanija save(Zupanija z);
 }

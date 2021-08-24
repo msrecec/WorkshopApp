@@ -5,14 +5,16 @@ import com.example.workshop.model.count.Count;
 import com.example.workshop.model.zupanija.Zupanija;
 import com.example.workshop.model.zupanija.ZupanijaPaginated;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Repository
@@ -33,6 +35,18 @@ public class ZupanijaRepositoryImpl implements ZupanijaRepository{
                 .withTableName("zupanija")
                 .usingGeneratedKeyColumns("sifZupanija");
         this.rowMapperCustom = rowMapperCustom;
+    }
+
+    @Override
+    public Optional<Zupanija> save(Zupanija zupanija) {
+        try {
+            zupanija.setSifZupanija(saveZupanija(zupanija));
+            System.out.println("Zupanija sifra " + zupanija.getSifZupanija());
+            System.out.println("Zupanija naziv " + zupanija.getNazivZupanija());
+            return Optional.of(zupanija);
+        } catch (DuplicateKeyException e) {
+            return Optional.empty();
+        }
     }
 
     @Override
@@ -67,6 +81,15 @@ public class ZupanijaRepositoryImpl implements ZupanijaRepository{
             ex.printStackTrace();
             return Optional.empty();
         }
+    }
+
+    private long saveZupanija(Zupanija zupanija) {
+        Map<String, Object> values = new HashMap<>();
+
+        values.put("sif_zupanija", "default");
+        values.put("naziv_zupanija", zupanija.getNazivZupanija());
+
+        return inserter.executeAndReturnKey(values).longValue();
     }
 
 }

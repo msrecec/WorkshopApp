@@ -1,12 +1,16 @@
 package com.example.workshop.rest;
 
 import com.example.workshop.model.count.Count;
+import com.example.workshop.model.zupanija.Zupanija;
+import com.example.workshop.model.zupanija.ZupanijaCommand;
 import com.example.workshop.model.zupanija.ZupanijaDTO;
 import com.example.workshop.model.zupanija.ZupanijaDTOPaginated;
 import com.example.workshop.service.zupanija.ZupanijaService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -49,6 +53,21 @@ public class ZupanijaController {
         return zupanijaService.findZupanijaCount()
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @PostMapping
+    public ResponseEntity<ZupanijaDTO> save(@Valid @RequestBody final ZupanijaCommand command) {
+        return zupanijaService.save(command)
+                .map(
+                        zupanijaDTO -> ResponseEntity
+                                .status(HttpStatus.CREATED)
+                                .body(zupanijaDTO)
+                )
+                .orElseGet(
+                        () -> ResponseEntity
+                                .status(HttpStatus.CONFLICT)
+                                .build()
+                );
     }
 
 }
