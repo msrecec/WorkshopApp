@@ -15,4 +15,5 @@ public interface ZupanijaService {
     Optional<ZupanijaDTOPaginated> findZupanijaByPage(int page);
     Optional<Count> findZupanijaCount();
     Optional<ZupanijaDTO> save(ZupanijaCommand command);
+    Optional<ZupanijaDTO> update(ZupanijaCommand command);
 }

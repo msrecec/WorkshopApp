@@ -38,6 +38,7 @@ public class ZupanijaRepositoryImpl implements ZupanijaRepository{
 
     @Override
     public Optional<Zupanija> save(Zupanija zupanija) {
+
         try {
 
             int changedRows = saveZupanija(zupanija);
@@ -47,6 +48,7 @@ public class ZupanijaRepositoryImpl implements ZupanijaRepository{
             }
 
             return Optional.of(zupanija);
+
         } catch (Exception e) {
             return Optional.empty();
         }
@@ -76,11 +78,15 @@ public class ZupanijaRepositoryImpl implements ZupanijaRepository{
             if(count.isEmpty()) {
                 throw new RuntimeException("Count must not be empty");
             }
+
             int offset = (page-1) * pageSize;
+
             if(offset >= count.get().getCount()) {
                 throw new RuntimeException("Offset must be smaller than the total number of elements");
             }
+
             List<Zupanija> zupanije = jdbc.query(SELECT_ALL + "LIMIT ? OFFSET ? ", rowMapperCustom::mapRowToZupanija, pageSize, offset);
+
             return Optional.ofNullable(new ZupanijaPaginated(zupanije, count.get().getCount()));
 
         } catch (RuntimeException e) {

@@ -6,6 +6,7 @@ import com.example.workshop.model.zupanija.ZupanijaCommand;
 import com.example.workshop.model.zupanija.ZupanijaDTO;
 import com.example.workshop.model.zupanija.ZupanijaDTOPaginated;
 import com.example.workshop.service.zupanija.ZupanijaService;
+import io.swagger.models.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -61,6 +62,21 @@ public class ZupanijaController {
                 .map(
                         zupanijaDTO -> ResponseEntity
                                 .status(HttpStatus.CREATED)
+                                .body(zupanijaDTO)
+                )
+                .orElseGet(
+                        () -> ResponseEntity
+                                .status(HttpStatus.CONFLICT)
+                                .build()
+                );
+    }
+
+    @PutMapping
+    public ResponseEntity<ZupanijaDTO> update(@Valid @RequestBody final ZupanijaCommand command) {
+        return zupanijaService.update(command)
+                .map(
+                        zupanijaDTO -> ResponseEntity
+                                .status(HttpStatus.OK)
                                 .body(zupanijaDTO)
                 )
                 .orElseGet(

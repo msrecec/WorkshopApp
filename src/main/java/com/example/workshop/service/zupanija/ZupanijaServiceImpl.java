@@ -54,4 +54,9 @@ public class ZupanijaServiceImpl implements ZupanijaService {
     public Optional<ZupanijaDTO> save(ZupanijaCommand command) {
         return zupanijaRepository.save(mapper.mapCommandToZupanija(command)).map(mapper::zupanijaToZupanijaDTO);
     }
+
+    @Override
+    public Optional<ZupanijaDTO> update(ZupanijaCommand command) {
+        return zupanijaRepository.update(mapper.mapCommandToZupanija(command)).map(mapper::zupanijaToZupanijaDTO);
+    }
 }
