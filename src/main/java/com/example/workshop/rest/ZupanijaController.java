@@ -1,12 +1,10 @@
 package com.example.workshop.rest;
 
 import com.example.workshop.model.count.Count;
-import com.example.workshop.model.zupanija.Zupanija;
 import com.example.workshop.model.zupanija.ZupanijaCommand;
 import com.example.workshop.model.zupanija.ZupanijaDTO;
 import com.example.workshop.model.zupanija.ZupanijaDTOPaginated;
 import com.example.workshop.service.zupanija.ZupanijaService;
-import io.swagger.models.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

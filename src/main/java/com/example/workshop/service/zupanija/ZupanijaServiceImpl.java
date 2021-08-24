@@ -41,6 +41,11 @@ public class ZupanijaServiceImpl implements ZupanijaService {
     }
 
     @Override
+    public Optional<ZupanijaDTO> findBySifZupanija(Long sifZupanija) {
+        return zupanijaRepositoryJpa.findBySifZupanija(sifZupanija).map(mapper::zupanijaToZupanijaDTO);
+    }
+
+    @Override
     public Optional<ZupanijaDTOPaginated> findZupanijaByPage(int page) {
         return zupanijaRepository.findZupanijaByPage(page).map(mapper::zupanijaToZupanijaDTOPaginated);
     }

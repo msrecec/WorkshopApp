@@ -12,6 +12,7 @@ import java.util.Optional;
 public interface ZupanijaService {
     List<ZupanijaDTO> findAll();
     Optional<ZupanijaDTO> findByNazivZupanija(String naziv);
+    Optional<ZupanijaDTO> findBySifZupanija(Long sifZupanija);
     Optional<ZupanijaDTOPaginated> findZupanijaByPage(int page);
     Optional<Count> findZupanijaCount();
     Optional<ZupanijaDTO> save(ZupanijaCommand command);
