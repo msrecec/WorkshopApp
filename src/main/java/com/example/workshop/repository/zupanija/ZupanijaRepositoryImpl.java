@@ -32,19 +32,35 @@ public class ZupanijaRepositoryImpl implements ZupanijaRepository{
     public ZupanijaRepositoryImpl(JdbcTemplate jdbc, RowMapperCustom rowMapperCustom) {
         this.jdbc = jdbc;
         this.inserter = new SimpleJdbcInsert(jdbc)
-                .withTableName("zupanija")
-                .usingGeneratedKeyColumns("sifZupanija");
+                .withTableName("zupanija");
         this.rowMapperCustom = rowMapperCustom;
     }
 
     @Override
     public Optional<Zupanija> save(Zupanija zupanija) {
         try {
-            zupanija.setSifZupanija(saveZupanija(zupanija));
-            System.out.println("Zupanija sifra " + zupanija.getSifZupanija());
-            System.out.println("Zupanija naziv " + zupanija.getNazivZupanija());
+
+            int changedRows = saveZupanija(zupanija);
+
+            if(changedRows <= 0) {
+                throw new Exception();
+            }
+
             return Optional.of(zupanija);
-        } catch (DuplicateKeyException e) {
+        } catch (Exception e) {
+            return Optional.empty();
+        }
+    }
+
+    @Override
+    public Optional<Zupanija> update(Zupanija zupanija) {
+        int executed = jdbc.update("UPDATE zupanija SET naziv_zupanija = ? WHERE sif_zupanija = ?",
+                zupanija.getNazivZupanija(),
+                zupanija.getSifZupanija()
+        );
+        if(executed > 0) {
+            return Optional.of(zupanija);
+        } else {
             return Optional.empty();
         }
     }
@@ -83,13 +99,13 @@ public class ZupanijaRepositoryImpl implements ZupanijaRepository{
         }
     }
 
-    private long saveZupanija(Zupanija zupanija) {
+    private int saveZupanija(Zupanija zupanija) {
         Map<String, Object> values = new HashMap<>();
 
-        values.put("sif_zupanija", "default");
+        values.put("sif_zupanija", zupanija.getSifZupanija());
         values.put("naziv_zupanija", zupanija.getNazivZupanija());
 
-        return inserter.executeAndReturnKey(values).longValue();
+        return inserter.execute(values);
     }
 
 }

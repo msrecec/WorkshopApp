@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 public class ZupanijaMapperImpl implements ZupanijaMapper {
     @Override
     public ZupanijaDTO zupanijaToZupanijaDTO(Zupanija zupanija) {
-        return new ZupanijaDTO( zupanija.getNazivZupanija());
+        return new ZupanijaDTO(zupanija.getSifZupanija(), zupanija.getNazivZupanija());
     }
 
     @Override
@@ -22,6 +22,6 @@ public class ZupanijaMapperImpl implements ZupanijaMapper {
 
     @Override
     public Zupanija mapCommandToZupanija(ZupanijaCommand command) {
-        return new Zupanija(null, command.getNazivZupanija(), null);
+        return new Zupanija(command.getSifZupanija(), command.getNazivZupanija(), null);
     }
 }

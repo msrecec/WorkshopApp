@@ -11,4 +11,5 @@ public interface ZupanijaRepository {
     Optional<ZupanijaPaginated> findZupanijaByPage(int page);
     Optional<Count> findZupanijaCount();
     Optional<Zupanija> save(Zupanija zupanija);
+    Optional<Zupanija> update(Zupanija zupanija);
 }
