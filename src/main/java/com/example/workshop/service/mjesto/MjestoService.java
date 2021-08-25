@@ -2,6 +2,7 @@ package com.example.workshop.service.mjesto;
 
 import com.example.workshop.model.count.Count;
 import com.example.workshop.model.mjesto.Mjesto;
+import com.example.workshop.model.mjesto.MjestoCommand;
 import com.example.workshop.model.mjesto.MjestoDTO;
 import com.example.workshop.model.mjesto.MjestoDTOPaginated;
 
@@ -13,5 +14,5 @@ public interface MjestoService {
     Optional<MjestoDTO> findByNazivMjesta(String naziv);
     Optional<MjestoDTOPaginated> findMjestoByPage(int page);
     Optional<Count> findMjestoCount();
-    Optional<Mjesto> testGetMjesto();
+    Optional<MjestoDTO> save(MjestoCommand command);
 }

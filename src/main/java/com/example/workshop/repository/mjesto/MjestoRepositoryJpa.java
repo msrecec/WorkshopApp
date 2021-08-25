@@ -9,4 +9,5 @@ import java.util.Optional;
 public interface MjestoRepositoryJpa extends JpaRepository<Mjesto, Long> {
     List<Mjesto> findAll();
     Optional<Mjesto> findByNazivMjesto(String naziv);
+    Mjesto save(Mjesto mjesto);
 }

@@ -4,6 +4,7 @@ import com.example.workshop.mappings.mapper.mjesto.MjestoMapper;
 import com.example.workshop.mappings.mapper.mjesto.MjestoMapperImpl;
 import com.example.workshop.model.count.Count;
 import com.example.workshop.model.mjesto.Mjesto;
+import com.example.workshop.model.mjesto.MjestoCommand;
 import com.example.workshop.model.mjesto.MjestoDTO;
 import com.example.workshop.model.mjesto.MjestoDTOPaginated;
 import com.example.workshop.repository.mjesto.MjestoRepository;
@@ -50,7 +51,7 @@ public class MjestoServiceImpl implements MjestoService{
     }
 
     @Override
-    public Optional<Mjesto> testGetMjesto() {
-        return mjestoRepositoryJpa.findByNazivMjesto("Križevci");
+    public Optional<MjestoDTO> save(MjestoCommand command) {
+        return Optional.ofNullable(mjestoRepositoryJpa.save(mapper.mapCommandToMjesto(command))).map(mapper::mjestoToMjestoDTO);
     }
 }

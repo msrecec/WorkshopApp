@@ -3,13 +3,16 @@ package com.example.workshop.rest;
 
 import com.example.workshop.model.count.Count;
 import com.example.workshop.model.mjesto.Mjesto;
+import com.example.workshop.model.mjesto.MjestoCommand;
 import com.example.workshop.model.mjesto.MjestoDTO;
 import com.example.workshop.model.mjesto.MjestoDTOPaginated;
 import com.example.workshop.model.zupanija.Zupanija;
 import com.example.workshop.service.mjesto.MjestoService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -55,9 +58,20 @@ public class MjestoController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-
-    @GetMapping("/test")
-    public ResponseEntity<Mjesto> getZupanijaTest() {
-        return mjestoService.testGetMjesto().map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    @PostMapping
+    public ResponseEntity<MjestoDTO> save(@Valid @RequestBody final MjestoCommand command) {
+        return mjestoService.save(command)
+                .map(
+                        mjestoDTO -> ResponseEntity
+                                .status(HttpStatus.CREATED)
+                                .body(mjestoDTO)
+                )
+                .orElseGet(
+                        () -> ResponseEntity
+                                .status(HttpStatus.CONFLICT)
+                                .build()
+                );
     }
+
+
 }
