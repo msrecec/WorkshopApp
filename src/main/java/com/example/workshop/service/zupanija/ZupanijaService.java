@@ -17,4 +17,5 @@ public interface ZupanijaService {
     Optional<Count> findZupanijaCount();
     Optional<ZupanijaDTO> save(ZupanijaCommand command);
     Optional<ZupanijaDTO> update(ZupanijaCommand command);
+    void deleteBySifZupanija(Long sifZupanija);
 }

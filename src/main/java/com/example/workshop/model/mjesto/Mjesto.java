@@ -21,7 +21,6 @@ import javax.persistence.*;
 public class Mjesto {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "pbr_mjesto")
     private Long pbrMjesto;
     @Column(name="naziv_mjesto")

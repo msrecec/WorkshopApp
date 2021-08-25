@@ -10,5 +10,5 @@ public interface ZupanijaRepositoryJpa extends JpaRepository<Zupanija, Long> {
     List<Zupanija> findAll();
     Optional<Zupanija> findByNazivZupanija(String naziv);
     Optional<Zupanija> findBySifZupanija(Long sifZupanija);
-    Zupanija save(Zupanija z);
+    Zupanija save(Zupanija zupanija);
 }

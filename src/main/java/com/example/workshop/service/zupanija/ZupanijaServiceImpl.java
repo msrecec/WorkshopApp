@@ -57,11 +57,16 @@ public class ZupanijaServiceImpl implements ZupanijaService {
 
     @Override
     public Optional<ZupanijaDTO> save(ZupanijaCommand command) {
-        return zupanijaRepository.save(mapper.mapCommandToZupanija(command)).map(mapper::zupanijaToZupanijaDTO);
+        return Optional.ofNullable(zupanijaRepositoryJpa.save(mapper.mapCommandToZupanija(command))).map(mapper::zupanijaToZupanijaDTO);
     }
 
     @Override
     public Optional<ZupanijaDTO> update(ZupanijaCommand command) {
         return zupanijaRepository.update(mapper.mapCommandToZupanija(command)).map(mapper::zupanijaToZupanijaDTO);
+    }
+
+    @Override
+    public void deleteBySifZupanija(Long sifZupanija) {
+        zupanijaRepository.deleteBySifZupanija(sifZupanija);
     }
 }

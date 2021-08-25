@@ -93,4 +93,10 @@ public class ZupanijaController {
                 );
     }
 
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/{sifZupanija}")
+    public void delete(@PathVariable Long sifZupanija) {
+        zupanijaService.deleteBySifZupanija(sifZupanija);
+    }
+
 }

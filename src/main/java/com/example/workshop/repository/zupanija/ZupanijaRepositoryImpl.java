@@ -27,31 +27,15 @@ public class ZupanijaRepositoryImpl implements ZupanijaRepository{
 
     private final JdbcTemplate jdbc;
     private final SimpleJdbcInsert inserter;
+    private final ZupanijaRepositoryJpa zupanijaRepositoryJpa;
 
     @Autowired
-    public ZupanijaRepositoryImpl(JdbcTemplate jdbc, RowMapperCustom rowMapperCustom) {
+    public ZupanijaRepositoryImpl(JdbcTemplate jdbc, RowMapperCustom rowMapperCustom, ZupanijaRepositoryJpa zupanijaRepositoryJpa) {
         this.jdbc = jdbc;
         this.inserter = new SimpleJdbcInsert(jdbc)
                 .withTableName("zupanija");
         this.rowMapperCustom = rowMapperCustom;
-    }
-
-    @Override
-    public Optional<Zupanija> save(Zupanija zupanija) {
-
-        try {
-
-            int changedRows = saveZupanija(zupanija);
-
-            if(changedRows <= 0) {
-                throw new Exception();
-            }
-
-            return Optional.of(zupanija);
-
-        } catch (Exception e) {
-            return Optional.empty();
-        }
+        this.zupanijaRepositoryJpa = zupanijaRepositoryJpa;
     }
 
     @Override
@@ -105,13 +89,13 @@ public class ZupanijaRepositoryImpl implements ZupanijaRepository{
         }
     }
 
-    private int saveZupanija(Zupanija zupanija) {
-        Map<String, Object> values = new HashMap<>();
+    @Override
+    @Transactional
+    public void deleteBySifZupanija(Long sifZupanija) {
+        Optional<Zupanija> zupanija = zupanijaRepositoryJpa.findBySifZupanija(sifZupanija);
 
-        values.put("sif_zupanija", zupanija.getSifZupanija());
-        values.put("naziv_zupanija", zupanija.getNazivZupanija());
-
-        return inserter.execute(values);
+        if(zupanija.isPresent()) {
+            jdbc.update("DELETE FROM zupanija WHERE sif_zupanija = ?", zupanija.get().getSifZupanija());
+        }
     }
-
 }

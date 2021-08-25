@@ -19,7 +19,6 @@ import java.util.List;
 public class Zupanija {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "sif_zupanija")
     private Long sifZupanija;
     @Column(name="naziv_zupanija")
