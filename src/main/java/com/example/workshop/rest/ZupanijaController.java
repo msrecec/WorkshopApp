@@ -28,9 +28,18 @@ public class ZupanijaController {
         return zupanijaService.findAll();
     }
 
-    @GetMapping("/{nazivZupanija}")
+    @GetMapping("/naziv/{nazivZupanija}")
     public ResponseEntity<ZupanijaDTO> getZupanijaByNaziv(@PathVariable final String nazivZupanija) {
         return zupanijaService.findByNazivZupanija(nazivZupanija)
+                .map(ResponseEntity::ok)
+                .orElseGet(
+                        () -> ResponseEntity.notFound().build()
+                );
+    }
+
+    @GetMapping("/sifra/{sifZupanija}")
+    public ResponseEntity<ZupanijaDTO> getZupanijaBySifra(@PathVariable final Long sifZupanija) {
+        return zupanijaService.findBySifZupanija(sifZupanija)
                 .map(ResponseEntity::ok)
                 .orElseGet(
                         () -> ResponseEntity.notFound().build()
