@@ -37,7 +37,14 @@ public class MjestoServiceImpl implements MjestoService{
 
     @Override
     public Optional<MjestoDTO> findByNazivMjesta(String naziv) {
-        return mjestoRepositoryJpa.findByNazivMjesto(naziv).map(mapper::mjestoToMjestoDTO);
+        Optional<Mjesto> mjesto = mjestoRepositoryJpa.findByNazivMjesto(naziv);
+
+        System.out.println(mjesto.get().getZupanija().getNazivZupanija());
+        System.out.println(mjesto.get().getZupanija().getSifZupanija());
+
+        return mjesto.map(mapper::mjestoToMjestoDTO);
+
+//        return mjestoRepositoryJpa.findByNazivMjesto(naziv).map(mapper::mjestoToMjestoDTO);
     }
 
     @Override

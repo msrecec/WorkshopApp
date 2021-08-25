@@ -23,6 +23,6 @@ public class Zupanija {
     private Long sifZupanija;
     @Column(name="naziv_zupanija")
     private String nazivZupanija;
-    @OneToMany(mappedBy="zupanija", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy="zupanija")
     private List<Mjesto> mjesta;
 }

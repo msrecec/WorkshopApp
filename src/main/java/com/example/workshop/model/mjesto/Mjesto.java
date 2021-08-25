@@ -27,6 +27,5 @@ public class Mjesto {
     private String nazivMjesto;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="sif_zupanija")
-    @JsonIgnore
     private Zupanija zupanija;
 }

@@ -22,7 +22,7 @@ public class MjestoMapperImpl implements MjestoMapper{
 
     @Override
     public MjestoDTO mjestoToMjestoDTO(Mjesto mjesto) {
-        return new MjestoDTO(mjesto.getPbrMjesto(), mjesto.getNazivMjesto());
+        return new MjestoDTO(mjesto.getPbrMjesto(), mjesto.getNazivMjesto(), zupanijaMapper.zupanijaToZupanijaDTO(mjesto.getZupanija()));
     }
 
     @Override
